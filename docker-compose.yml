@@ -29,7 +29,7 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_GROUP_INITIAL_REBALANCE_DELAY_MS: 0
-
+    
   schema-registry:
     image: confluentinc/cp-schema-registry:5.5.1
     hostname: schema-registry
@@ -167,6 +167,13 @@ services:
   prod_weather:
       container_name: prod_weather
       build: ./prod/weather
+      depends_on:
+      - zookeeper
+      - broker
+
+  cons_movie:
+      container_name: cons_movie
+      build: ./cons/movie
       depends_on:
       - zookeeper
       - broker

@@ -2,9 +2,17 @@ from kafka import KafkaConsumer
 from json import loads
 import json
 import pymongo as pym
+import time
 
-
-WeatherConsumer = KafkaConsumer('weatherdata',bootstrap_servers=['broker:29092'],value_deserializer=lambda x: loads(x.decode('utf-8')),)
+time.sleep(138)
+while True:
+    try:
+        WeatherConsumer = KafkaConsumer('weatherdata',bootstrap_servers=['broker:29092'],value_deserializer=lambda x: loads(x.decode('utf-8')),)
+        break
+    except:
+        print('Waiting for KafkaBroker')
+        time.sleep(60)
+        print('Next try!')
 
 
 

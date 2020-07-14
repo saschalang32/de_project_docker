@@ -2,12 +2,19 @@ from kafka import KafkaConsumer
 from json import loads
 import json
 import pymongo as pym
+import time
 
 
+time.sleep(138)
 
-
-
-FuelConsumer = KafkaConsumer('tankerkoenig',bootstrap_servers=['broker:29092'],value_deserializer=lambda x: loads(x.decode('utf-8')),)
+while True:
+    try:
+        FuelConsumer = KafkaConsumer('tankerkoenig',bootstrap_servers=['broker:29092'],value_deserializer=lambda x: loads(x.decode('utf-8')),)
+        break
+    except:
+        print('Waiting for KafkaBroker')
+        time.sleep(60)
+        print('Next try!')
 
 
 
